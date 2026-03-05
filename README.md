@@ -25,13 +25,22 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] Describe the game's purpose.
+  A number-guessing game where the player tries to guess a secret number within a limited number of attempts. Each guess returns a "Too High" or "Too Low" hint, and a score is tracked across attempts.
+
+- [x] Detail which bugs you found.
+  1. **Secret number kept changing** — `random.randint()` ran on every Streamlit rerun, generating a new secret each time the user clicked Submit.
+  2. **Hints were backwards** — "Too High" showed "Go HIGHER!" and "Too Low" showed "Go LOWER!", the opposite of what they should say.
+  3. **Attempt counter started at 1** — New games reset `attempts` to `1` instead of `0`, causing the first guess to count as the second attempt.
+
+- [x] Explain what fixes you applied.
+  1. Guarded `random.randint()` with `if "secret" not in st.session_state:` so the secret is only generated once per game session.
+  2. Swapped the hint messages in `check_guess` so "Too High" says "Go LOWER!" and "Too Low" says "Go HIGHER!".
+  3. Changed the new-game reset to set `attempts = 0` so attempt counting starts correctly.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- [ ![alt text](image.png)] [Insert a screenshot of your fixed, winning game here]
 
 ## 🚀 Stretch Features
 
